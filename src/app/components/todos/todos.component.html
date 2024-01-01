@@ -23,10 +23,10 @@
         </section>
         <section class="list">
             <div *ngFor="let todo of todos" class="item flex flex-row justify-between border-2 p-2 my-2 rounded-xl">
-                <div class="id w-1/12">
+                <div class="id w-1/12 hidden">
                     <span>{{ todo.id }}</span>
                 </div>
-                <div class="text w-10/12">
+                <div class="text w-11/12">
                     <p (click)="toggleCompleted(todo.id)" [class.line-through]="todo.completed">{{ todo.text }}</p>
                 </div>
                 <div class="controls w-1/12 text-right">

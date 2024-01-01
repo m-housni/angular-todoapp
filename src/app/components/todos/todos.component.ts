@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NewTodoComponent } from '../new-todo/new-todo.component';
 import { EditTodoComponent } from "../edit-todo/edit-todo.component";
+import { v4 as uuidv4 } from 'uuid';
 
 
 @Component({
@@ -17,17 +18,17 @@ export class TodosComponent {
   
   showAddNewTodoForm: boolean = true;
   showEditTodoForm: boolean = true;
-  id!: number;
+  id!: string;
   todoText!: string;
 
   receiveClose() {
     this.showEditTodoForm = true;
   }
 
-  deleteTodo(id: number) {
+  deleteTodo(id: string) {
     this.todos = this.todos.filter(todo => todo.id !== id);
   }
-  editTodo(id: number) {
+  editTodo(id: string) {
     this.id = id;
     this.todoText = this.todos.filter(todo => todo.id === id)[0].text;
     this.showEditTodoForm = false;
@@ -38,7 +39,7 @@ export class TodosComponent {
   clearAll() {
     this.todos = [];
   }
-  toggleCompleted(id: number) {
+  toggleCompleted(id: string) {
     this.todos.map(todo => {
       if (todo.id === id) {
         todo.completed = !todo.completed;
@@ -46,11 +47,11 @@ export class TodosComponent {
     });
   }
   receivedText: string = '';
-  receiveText(text: string, id: number = 0) {
+  receiveText(text: string, id: string = '') {
     this.receivedText = text;
     if(!id)
       this.todos.push({
-        id: this.todos.length + 1,
+        id: uuidv4(),
         text: text,
         completed: false
       });
@@ -60,7 +61,7 @@ export class TodosComponent {
           todo.text = text;
         }
       })
-      this.showEditTodoForm = true;
+    this.showEditTodoForm = true;
   }
 
   receiveShow() {
@@ -71,17 +72,17 @@ export class TodosComponent {
   }
   todos: Todo[] = [
     {
-      id: 1,
+      id: uuidv4(),
       text: 'Todo One',
       completed: false
     },
     {
-      id: 2,
+      id: uuidv4(),
       text: 'Todo Two',
       completed: true
     },
     {
-      id: 3,
+      id: uuidv4(),
       text: 'Todo Three',
       completed: false
     }

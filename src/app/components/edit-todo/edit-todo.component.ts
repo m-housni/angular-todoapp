@@ -9,7 +9,7 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './edit-todo.component.css'
 })
 export class EditTodoComponent {
-  @Input() id: number = 0;
+  @Input() id: string = '';
   @Input() todoText: string = '';
   @Output() editTodoEvent = new EventEmitter<string>();
   @Input() close: boolean = false;
